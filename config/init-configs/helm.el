@@ -139,6 +139,8 @@
 ;; C-c p a - other file
 ;; C-c p p - select project
 
+;; Help ffap (C-c C-o) find files in compilation output
+;; Add project root dir to the compilation-search-path
 (defun my-compilation-find-file ( orig marker filename dir &rest formats )
   "Find a buffer for file FILENAME."
   (let* ((lst (if (projectile-project-p dir)
