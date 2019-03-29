@@ -91,7 +91,7 @@
 ;;   ;; If there is more than one, they won't work right.
 ;;  )
 
-;; '(current-language-environment "Latin-4") - this breaks melpa
+;; '(current-language-environment "Latin-4") - !!! this breaks melpa !!!
 
 (when window-system 
   (ediff-toggle-multiframe))
@@ -139,6 +139,7 @@
 (require 'psvn)
 (setq svn-status-track-user-input 't)
 ;; (setq svn-status-edit-svn-command 't)
+;; svn-psvn-revision - version
 
 (defun svn-pre-run-add-force-interactive ()
   ""
