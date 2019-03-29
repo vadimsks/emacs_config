@@ -46,6 +46,9 @@
       helm-ff-file-name-history-use-recentf t
       helm-echo-input-in-header-line t)
 
+ (recentf-mode 1)
+ (setq-default recent-save-file "~/.emacs.d/recentf")
+
 (setq
       helm-idle-delay                       0.0
       helm-input-idle-delay                 0.01

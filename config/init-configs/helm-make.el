@@ -177,6 +177,7 @@
 ;; helm-min slowness - https://github.com/emacs-helm/helm/issues/2089
 
 ;; When non-nil, run helm-make in Comint mode instead of Compilation mode.
+;; compilation-next-error [M-C-n]
 (setq helm-make-comint t)
 
 ;;
