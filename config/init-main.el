@@ -1,3 +1,8 @@
+;; .emacs contents
+;; (setq custom-file "/home/developer/work/emacs/emacs_config/config/init-main.el")
+;; (load custom-file 'noerror)
+
+
 ;;(server-start)
 (global-auto-revert-mode 1)
 (setq load-path (cons (expand-file-name "~/.emacs.d/el") load-path))
