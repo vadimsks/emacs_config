@@ -2,6 +2,9 @@
 ;; https://www.gnu.org/software/emacs/manual/html_node/cl/Sequences.html#Sequences
 ;; helm-make-target-history
 
+(use-package helm-make
+  :ensure t)
+
 (require 'helm-make)
 
 (defun helm--make-action (target)
@@ -17,6 +20,7 @@
          (tgt-lst (split-string (or targets target))))
     (when helm-make-named-buffer
       (helm--make-rename-buffer compile-buffer (or targets target)))
+    ;; update helm-make-target-history
     (setq helm-make-target-history
           (cl-set-difference helm-make-target-history tgt-lst  :test #'equal))
     (setcdr (last tgt-lst) helm-make-target-history)
@@ -171,3 +175,16 @@
 
 
 ;; helm-min slowness - https://github.com/emacs-helm/helm/issues/2089
+
+;; When non-nil, run helm-make in Comint mode instead of Compilation mode.
+(setq helm-make-comint t)
+
+;;
+;; (defun run-it ()
+;;   "Run it on the current file."
+;;   (interactive)
+;;   (save-buffer)
+;;   (shell-command
+;;    (format "my_command %s &"
+;;        (shell-quote-argument (buffer-name)))))
+;; (global-set-key "\C-ct" 'run-it)
