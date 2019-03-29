@@ -221,7 +221,15 @@
 ; whitespace-mode
                                         ; tabify
 
-(setq my-init-configs-dir "~/work/emacs/emacs_config/config/init-configs/")
+;; Elisp: Get Script Name at Run Time, Call by Relative Path
+;; http://ergoemacs.org/emacs/elisp_relative_path.html
+;;(setq my-init-configs-dir "~/work/emacs/emacs_config/config/init-configs/")
+
+(setq my-init-configs-dir
+      (concat
+       (file-name-directory (or load-file-name buffer-file-name))
+       "init-configs/" ))
+
 (defun my-load-init-config (file-name)
   ""
   (load (concat my-init-configs-dir file-name)))
