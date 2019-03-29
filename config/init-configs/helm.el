@@ -46,6 +46,11 @@
       helm-ff-file-name-history-use-recentf t
       helm-echo-input-in-header-line t)
 
+(setq
+      helm-idle-delay                       0.0
+      helm-input-idle-delay                 0.01
+      helm-quick-update                     t
+      )
 
 (defun spacemacs//helm-hide-minibuffer-maybe ()
   "Hide minibuffer in Helm session if we use the header line as input field."
