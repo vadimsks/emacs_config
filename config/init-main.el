@@ -227,9 +227,9 @@
 
 ;; https://blog.patshead.com/2013/12/emacs-elpa-and-use-package-blog.html - use-package
 ;; https://github.com/jwiegley/use-package
-(my-load-init-config "init-magit.el")
 (my-load-init-config "helm.el")
 (my-load-init-config "helm-make.el")
+(my-load-init-config "init-magit.el")
 (my-load-init-config "ido.el")
 (my-load-init-config "init-ffap.el")
 (my-load-init-config "smex.el")
