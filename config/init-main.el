@@ -71,6 +71,7 @@
  '(default-input-method "latin-4-postfix")
  '(ediff-patch-options "-f -p5")
  '(global-font-lock-mode t nil (font-lock))
+ '(magit-completing-read-function (quote helm--completing-read-default))
  '(menu-bar-mode t)
  '(package-selected-packages
    (quote
