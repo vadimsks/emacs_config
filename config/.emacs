@@ -220,11 +220,13 @@
 ; whitespace-mode
                                         ; tabify
 
-(setq my-init-configs-dir "~/.emacs.d/init-configs/")
+(setq my-init-configs-dir "~/work/emacs/emacs_config/config/init-configs/")
 (defun my-load-init-config (file-name)
   ""
   (load (concat my-init-configs-dir file-name)))
 
+;; https://blog.patshead.com/2013/12/emacs-elpa-and-use-package-blog.html - use-package
+;; https://github.com/jwiegley/use-package
 (my-load-init-config "init-magit.el")
 (my-load-init-config "helm.el")
 (my-load-init-config "helm-make.el")
@@ -243,21 +245,3 @@
 (my-load-init-config "bindings.el")
 
 
-;; https://blog.patshead.com/2013/12/emacs-elpa-and-use-package-blog.html - use-package
-;; https://github.com/jwiegley/use-package
-;; (load "~/.emacs.d/init-configs/init-magit.el")
-;; (load "~/.emacs.d/init-configs/helm.el")
-;; (load "~/.emacs.d/init-configs/helm-make.el")
-;; (load "~/.emacs.d/init-configs/ido.el")
-;; (load "~/.emacs.d/init-configs/init-ffap.el")
-;; (load "~/.emacs.d/init-configs/smex.el")
-;; (load "~/.emacs.d/init-configs/gui.el")
-;; (load "~/.emacs.d/init-configs/sunrise.el")
-;; (load "~/.emacs.d/init-configs/company.el")
-;; ;(load "~/.emacs.d/init-configs/cedet.el")
-;; (load "~/.emacs.d/init-configs/cpp_fmt.el")
-;; (load "~/.emacs.d/init-configs/autosave.el")
-;; (load "~/.emacs.d/init-configs/eshell.el")
-;; (load "~/.emacs.d/init-configs/org.el")
-;; (load "~/.emacs.d/init-configs/browse-url.el")
-;; (load "~/.emacs.d/init-configs/bindings.el")
