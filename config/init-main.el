@@ -76,11 +76,12 @@
  '(default-input-method "latin-4-postfix")
  '(ediff-patch-options "-f -p5")
  '(global-font-lock-mode t nil (font-lock))
+ '(helm-pdfgrep-default-command "pdfgrep --cache --color always -niH %s %s")
  '(magit-completing-read-function (quote helm--completing-read-default))
  '(menu-bar-mode t)
  '(package-selected-packages
    (quote
-    (magit helm-mode helm-flx helm-projectile helm-make helm-tramp helm-swoop helm-ag helm-smex helm use-package ztree smart-tabs-mode)))
+    (markdown-mode magit helm-mode helm-flx helm-projectile helm-make helm-tramp helm-swoop helm-ag helm-smex helm use-package ztree smart-tabs-mode)))
  '(select-enable-clipboard t)
  '(semantic-complete-inline-analyzer-idle-displayor-class (quote semantic-displayor-ghost))
  '(show-paren-mode t))
@@ -220,13 +221,6 @@
     files))))
 
 
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-
-(require 'whitespace)
-; whitespace-mode
-                                        ; tabify
-
 ;; Elisp: Get Script Name at Run Time, Call by Relative Path
 ;; http://ergoemacs.org/emacs/elisp_relative_path.html
 ;;(setq my-init-configs-dir "~/work/emacs/emacs_config/config/init-configs/")
@@ -245,7 +239,7 @@
 (my-load-init-config "helm.el")
 (my-load-init-config "helm-make.el")
 (my-load-init-config "init-magit.el")
-(my-load-init-config "ido.el")
+;;(my-load-init-config "ido.el")
 (my-load-init-config "init-ffap.el")
 (my-load-init-config "smex.el")
 (my-load-init-config "gui.el")
@@ -258,5 +252,4 @@
 (my-load-init-config "org.el")
 (my-load-init-config "browse-url.el")
 (my-load-init-config "bindings.el")
-
-
+(my-load-init-config "init-modes.el")

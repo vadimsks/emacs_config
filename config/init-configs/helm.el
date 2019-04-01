@@ -27,12 +27,6 @@
 (use-package helm-projectile
   :ensure t)
 
-(global-set-key (kbd "C-x C-f") #'helm-find-files)
-
-;; helm-swoop
-(global-set-key (kbd "M-i") 'helm-swoop)
-(global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
-
 ;; When doing isearch, hand the word over to helm-swoop
 (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
 ;; From helm-swoop to helm-multi-swoop-all
@@ -70,8 +64,29 @@
 (setq helm-autoresize-min-height 80)
 (helm-autoresize-mode 1)
 
+;; --------------------------------------------------
+;; recentf 
+;; --------------------------------------------------
+(recentf-mode 1)
+(setq-default recent-save-file "~/.emacs.d/recentf")
 
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+;; (defun helm-ff-recentf (_candidate)
+;;   "Browse project in current directory.
+;; See `helm-browse-project'."
+;;   (with-helm-default-directory helm-ff-default-directory
+;;     (helm-recentf)))
+
+(defun my-helm-ff-run-recent ()
+  "Run helm-recentf action from `helm-source-find-files'."
+  (interactive)
+  (with-helm-alive-p
+    ;;(helm-exit-and-execute-action 'helm-ff-recentf)
+    (helm-run-after-exit 'helm-recentf)
+    ))
+
+(define-key helm-find-files-map (kbd "C-r") 'my-helm-ff-run-recent)
+;;(define-key helm-find-files-map (kbd "C-j") 'helm-find-files-up-one-level)
+;; (define-key helm-find-files-map (kbd "C-l") 'helm-execute-persistent-action)
 
 (setq helm-buffers-fuzzy-matching t
       helm-recentf-fuzzy-match    t)
@@ -124,6 +139,8 @@
 ;; C-c p a - other file
 ;; C-c p p - select project
 
+;; Help ffap (C-c C-o) find files in compilation output
+;; Add project root dir to the compilation-search-path
 (defun my-compilation-find-file ( orig marker filename dir &rest formats )
   "Find a buffer for file FILENAME."
   (let* ((lst (if (projectile-project-p dir)
@@ -148,4 +165,12 @@
 ;;   (with-current-buffer buf
 ;;     "test"))
 
+
+(global-set-key (kbd "C-x C-f") #'helm-find-files)
+
+;; helm-swoop
+(global-set-key (kbd "M-i") 'helm-swoop)
+(global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
+
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
 
