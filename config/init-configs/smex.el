@@ -1,5 +1,7 @@
 ;; Smex (M-x with ido)
 ;; (add-to-list 'load-path "~/.emacs.d/libs/smex/")
+(use-package smex
+  :ensure t)
 (require 'smex)
 (smex-initialize)
 (setq smex-save-file "~/.emacs.d/smex-save-file")
