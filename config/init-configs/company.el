@@ -22,7 +22,7 @@
   :config
 
   (setq company-backends (delete 'company-semantic company-backends)) ; clang backend
-  (global-company-mode)
+  ; (global-company-mode)
   (setq company-tooltip-limit 10)
   (setq company-dabbrev-downcase 0)
   (setq company-idle-delay 0)
