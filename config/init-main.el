@@ -81,7 +81,7 @@
  '(menu-bar-mode t)
  '(package-selected-packages
    (quote
-    (markdown-mode magit helm-mode helm-flx helm-projectile helm-make helm-tramp helm-swoop helm-ag helm-smex helm use-package ztree smart-tabs-mode)))
+    (web-mode markdown-mode magit helm-mode helm-flx helm-projectile helm-make helm-tramp helm-swoop helm-ag helm-smex helm use-package ztree smart-tabs-mode)))
  '(select-enable-clipboard t)
  '(semantic-complete-inline-analyzer-idle-displayor-class (quote semantic-displayor-ghost))
  '(show-paren-mode t))
@@ -92,7 +92,7 @@
 ;;   ;; If there is more than one, they won't work right.
 ;;  )
 
-;; '(current-language-environment "Latin-4") - this breaks melpa
+;; '(current-language-environment "Latin-4") - !!! this breaks melpa !!!
 
 (when window-system 
   (ediff-toggle-multiframe))
@@ -140,6 +140,7 @@
 (require 'psvn)
 (setq svn-status-track-user-input 't)
 ;; (setq svn-status-edit-svn-command 't)
+;; svn-psvn-revision - version
 
 (defun svn-pre-run-add-force-interactive ()
   ""
@@ -252,3 +253,4 @@
 (my-load-init-config "browse-url.el")
 (my-load-init-config "bindings.el")
 (my-load-init-config "init-modes.el")
+(my-load-init-config "init-clang.el")
