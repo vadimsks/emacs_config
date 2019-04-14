@@ -99,6 +99,9 @@
           #'(lambda ()
               (define-key eshell-mode-map (kbd "C-c C-l")  'helm-eshell-history)))
 
+;; don't use a new frame for shell history
+(setq helm-show-completion-display-function #'helm-show-completion-default-display-function)
+
 ;;; projectile
 
 ;;(projectile-global-mode)
