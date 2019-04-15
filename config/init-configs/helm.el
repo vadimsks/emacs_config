@@ -174,3 +174,5 @@
 
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 
+
+;; (define-key sr-mode-map "\C-x\C-f"    'helm-find-file)
