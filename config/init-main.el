@@ -248,7 +248,7 @@
 ;(my-load-init-config "cedet.el")
 (my-load-init-config "cpp_fmt.el")
 (my-load-init-config "autosave.el")
-(my-load-init-config "eshell.el")
+(my-load-init-config "init-eshell.el")
 (my-load-init-config "org.el")
 (my-load-init-config "browse-url.el")
 (my-load-init-config "bindings.el")

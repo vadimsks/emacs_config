@@ -23,7 +23,7 @@
 
   (require 'cc-mode)
   (setq company-backends (cons 'company-capf (delete 'company-capf company-backends))) ; capf backend
-  (global-company-mode)
+  ; (global-company-mode)
   (setq company-tooltip-limit 10)
   (setq company-dabbrev-downcase 0)
   (setq company-idle-delay 0)
