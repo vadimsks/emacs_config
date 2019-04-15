@@ -54,9 +54,35 @@
 
 (advice-add 'helm--make-cached-targets :around #'my-helm--make-cached-targets )
 
+;; added Makefile.menu to the list
+(setq helm-make-makefile-names (cons "Makefile.menu" helm-make-makefile-names))
+
+;; added -f Makefile.menu parameter
+(defun my-helm--make-construct-command (arg file)
+  "Construct the `helm-make-command'.
+
+ARG should be universal prefix value passed to `helm-make' or
+`helm-make-projectile', and file is the path to the Makefile or the
+ninja.build file."
+  (format (concat "%s%s -C %s -f %s " helm-make-arguments " %%s")
+          (if (= helm-make-niceness 0)
+              ""
+            (format "nice -n %d " helm-make-niceness))
+          (cond
+            ((equal helm--make-build-system 'ninja)
+             helm-make-ninja-executable)
+            (t
+             helm-make-executable))
+          (replace-regexp-in-string
+           "^/\\(scp\\|ssh\\).+?:" ""
+           (shell-quote-argument (file-name-directory file)))
+          (file-name-nondirectory file)
+          arg))
+
 (defvar helm-make-f5-dir nil
   "Store the last make dir.")
 
+;; use my-helm--make-construct-command
 (defun helm-make-f5 (&optional arg)
   "Call \"make -j ARG target\". Target is selected with completion."
   (interactive "p")
@@ -64,7 +90,7 @@
     (if (not makefile)
         (error "No build file in %s" default-directory)
       (setq helm-make-f5-dir default-directory)
-      (setq helm-make-command (helm--make-construct-command arg makefile))
+      (setq helm-make-command (my-helm--make-construct-command arg makefile))
       (helm--make makefile))))
 
 ;; (defun helm-make-C-f5 (&optional arg)
@@ -79,13 +105,14 @@
 ;;         (helm--make makefile))
 ;;       )))
 
+;; use my-helm--make-construct-command
 (defun helm-make-C-f5 (&optional arg)
   "Call \"make -j ARG target\". Target is selected with completion."
   (interactive "p")
   (let ((makefile (helm--make-makefile-exists helm-make-f5-dir)))
     (if (not makefile)
         (error "No build file in %s" helm-make-f5-dir)
-      (setq helm-make-command (helm--make-construct-command arg makefile))
+      (setq helm-make-command (my-helm--make-construct-command arg makefile))
       ; (setq default-directory helm-make-f5-dir)
       (let ((compilation-search-path helm-make-f5-dir)
             (default-directory helm-make-f5-dir))

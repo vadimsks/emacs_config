@@ -21,7 +21,8 @@
   ;; (add-hook 'comint-mode-hook 'company-mode)
   :config
 
-  (setq company-backends (delete 'company-semantic company-backends)) ; clang backend
+  (require 'cc-mode)
+  (setq company-backends (cons 'company-capf (delete 'company-capf company-backends))) ; capf backend
   ; (global-company-mode)
   (setq company-tooltip-limit 10)
   (setq company-dabbrev-downcase 0)
@@ -38,6 +39,8 @@
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous)
   (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+  ;;(define-key c-mode-map  [(tab)] 'company-capf)
+  ;;(define-key c++-mode-map  [(tab)] 'company-capf)
   (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
   (define-key company-active-map (kbd "S-TAB") 'company-select-previous)
   (define-key company-active-map (kbd "<backtab>") 'company-select-previous)
