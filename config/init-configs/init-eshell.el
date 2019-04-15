@@ -55,6 +55,7 @@ means to createa new session.  Returns the buffer selected (or created)."
     ) )
 
 ;;; (setq sr-ti-openterms (delete (current-buffer) sr-ti-openterms))
+;;; display-buffer-mark-dedicated
 
 (defun my-eshell-clear ()
   "Clear `eshell' buffer, comint-style."
