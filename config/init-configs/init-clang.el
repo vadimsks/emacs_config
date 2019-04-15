@@ -29,3 +29,6 @@
 ;; eglot - starts clangd, requires <root>/compile_commands.json
 ;; xref-find-definitions
 ;; company-capf
+
+(use-package cmake-mode
+  :ensure t)
