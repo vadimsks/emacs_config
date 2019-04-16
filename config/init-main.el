@@ -81,7 +81,7 @@
  '(menu-bar-mode t)
  '(package-selected-packages
    (quote
-    (cmake-mode eglot web-mode markdown-mode magit helm-mode helm-flx helm-projectile helm-make helm-tramp helm-swoop helm-ag helm-smex helm use-package ztree smart-tabs-mode)))
+    (helm-c-yasnippet yasnippet-snippets yasnippet cmake-mode eglot web-mode markdown-mode magit helm-mode helm-flx helm-projectile helm-make helm-tramp helm-swoop helm-ag helm-smex helm use-package ztree smart-tabs-mode)))
  '(select-enable-clipboard t)
  '(semantic-complete-inline-analyzer-idle-displayor-class (quote semantic-displayor-ghost))
  '(show-paren-mode t))

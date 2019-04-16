@@ -49,3 +49,27 @@
 
 (add-hook 'c-mode-hook 'my-c-mode-hook)
 (add-hook 'c++-mode-hook 'my-c-mode-hook)
+
+
+;; helm-c-yasnippet
+  ;; yasnippet          0.13.0        available  gnu        Yet another snippet extension for Emacs.
+  ;; yasnippet          20190414.1606 available  melpa      Yet another snippet extension for Emacs.
+  ;; yasnippet-class... 1.0.2         available  gnu        "Classic" yasnippet snippets
+  ;; yasnippet-snippets 20190316.1019 available  melpa      Collection of yasnippet snippets
+;;  yatemplate         20180617.952  available  melpa      File templates with yasnippet
+
+
+(use-package yasnippet
+  :ensure t)
+(use-package yasnippet-snippets
+  :ensure t)
+(use-package helm-c-yasnippet
+  :ensure t)
+
+
+(require 'yasnippet)
+(require 'helm-c-yasnippet)
+(setq helm-yas-space-match-any-greedy t) ;[default: nil]
+(global-set-key (kbd "C-c y") 'helm-yas-complete)
+(yas-global-mode 1)
+;; (yas-load-directory "<path>/<to>/snippets/")
