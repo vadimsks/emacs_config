@@ -81,7 +81,7 @@
  '(menu-bar-mode t)
  '(package-selected-packages
    (quote
-    (helm-c-yasnippet yasnippet-snippets yasnippet cmake-mode eglot web-mode markdown-mode magit helm-mode helm-flx helm-projectile helm-make helm-tramp helm-swoop helm-ag helm-smex helm use-package ztree smart-tabs-mode)))
+    (emmet-mode buttercup yatemplate helm-c-yasnippet yasnippet-snippets yasnippet cmake-mode eglot web-mode markdown-mode magit helm-mode helm-flx helm-projectile helm-make helm-tramp helm-swoop helm-ag helm-smex helm use-package ztree smart-tabs-mode)))
  '(select-enable-clipboard t)
  '(semantic-complete-inline-analyzer-idle-displayor-class (quote semantic-displayor-ghost))
  '(show-paren-mode t))
@@ -254,3 +254,5 @@
 (my-load-init-config "bindings.el")
 (my-load-init-config "init-modes.el")
 (my-load-init-config "init-clang.el")
+
+(my-load-init-config "init-html.el")
