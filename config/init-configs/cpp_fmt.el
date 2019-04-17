@@ -66,10 +66,40 @@
 (use-package helm-c-yasnippet
   :ensure t)
 
-
 (require 'yasnippet)
 (require 'helm-c-yasnippet)
 (setq helm-yas-space-match-any-greedy t) ;[default: nil]
 (global-set-key (kbd "C-c y") 'helm-yas-complete)
 (yas-global-mode 1)
 ;; (yas-load-directory "<path>/<to>/snippets/")
+
+
+;; yatemplate
+(use-package buttercup
+  :ensure t)
+(use-package yatemplate
+  :ensure t)
+
+(require 'yatemplate)
+
+(yatemplate-fill-alist)
+
+;;yas--parse-template
+
+;; (defun yatemplate-expand-yas-buffer ()
+;;   "Expand the whole buffer with `yas-expand-snippet'."
+;;   (yas-expand-snippet (buffer-string) (point-min) (point-max)))
+
+(defun yatemplate-expand-yas-buffer ()
+  "Expand the whole buffer with `yas-expand-snippet'."
+  (let* ((parsed (yas--parse-template))
+         (key (pop parsed))
+         (template (pop parsed))
+         (name (pop parsed))
+         (condition (pop parsed))
+         (group (pop parsed))
+         (expand-env (pop parsed))
+         )
+    (yas-expand-snippet template (point-min) (point-max) expand-env)) )
+
+;;(yas-lookup-snippet "and")
