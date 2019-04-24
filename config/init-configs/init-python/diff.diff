@@ -1,0 +1,53 @@
+diff --git a/yapf/yapflib/unwrapped_line.py b/yapf/yapflib/unwrapped_line.py
+index fb12755..7f19bd8 100644
+--- a/yapf/yapflib/unwrapped_line.py
++++ b/yapf/yapflib/unwrapped_line.py
+@@ -263,6 +263,9 @@ def _PriorityIndicatingNoSpace(tok):
+ 
+ def _SpaceRequiredBetween(left, right):
+   """Return True if a space is required between the left and right token."""
++
++#  import pdb; pdb.set_trace()
++  
+   lval = left.value
+   rval = right.value
+   if (left.is_pseudo_paren and _IsIdNumberStringToken(right) and
+@@ -388,18 +391,25 @@ def _SpaceRequiredBetween(left, right):
+   if (lval in pytree_utils.OPENING_BRACKETS and
+       rval in pytree_utils.OPENING_BRACKETS):
+     # Nested objects' opening brackets shouldn't be separated.
+-    return False
++    # !!!
++    return True
+   if (lval in pytree_utils.CLOSING_BRACKETS and
+       rval in pytree_utils.CLOSING_BRACKETS):
+     # Nested objects' closing brackets shouldn't be separated.
+-    return False
++    # !!!
++    return True
+   if lval in pytree_utils.CLOSING_BRACKETS and rval in '([':
+     # A call, set, dictionary, or subscript that has a call or subscript after
+     # it shouldn't have a space between them.
+     return False
+   if lval in pytree_utils.OPENING_BRACKETS and _IsIdNumberStringToken(right):
+     # Don't separate the opening bracket from the first item.
+-    return False
++    # !!!
++    return True
++  if rval in pytree_utils.CLOSING_BRACKETS and _IsIdNumberStringToken(left):
++    # Don't separate the opening bracket from the first item.
++    # !!!
++    return True
+   if left.is_name and rval in '([':
+     # Don't separate a call or array access from the name.
+     return False
+@@ -412,7 +422,8 @@ def _SpaceRequiredBetween(left, right):
+     return False
+   if lval in pytree_utils.OPENING_BRACKETS and _IsUnaryOperator(right):
+     # Don't separate a unary operator from the opening bracket.
+-    return False
++    # !!!
++    return True
+   if (lval in pytree_utils.OPENING_BRACKETS and
+       (format_token.Subtype.VARARGS_STAR in right.subtypes or
+        format_token.Subtype.KWARGS_STAR_STAR in right.subtypes)):
