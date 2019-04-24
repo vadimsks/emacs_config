@@ -1,3 +1,5 @@
+;; todo compare with ccls
+
 (use-package eglot
   :ensure t)
 (require 'eglot)
@@ -22,8 +24,8 @@
           (global-set-key [M-q] 'clang-format-region)
           (define-key c-mode-map (kbd "M-q") 'clang-format-region)
           (define-key c++-mode-map (kbd "M-q") 'clang-format-region)
-          (add-to-list 'eglot-server-programs '((c++-mode c-mode)
-                                                (concat dir "/bin/clangd") )))
+          (add-to-list 'eglot-server-programs (list '(c++-mode c-mode)
+                                                    (concat dir "/bin/clangd") )))
       (message "Cannot find clan in %s" my-clang-dir) ) ) )
 
 ;; eglot - starts clangd, requires <root>/compile_commands.json
