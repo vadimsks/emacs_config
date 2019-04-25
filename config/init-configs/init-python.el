@@ -63,41 +63,82 @@
   ;;   (error (format "%s command not found." executable-name)))
   ;; Make sure tempfile is an absolute path in the current directory so that
   ;; YAPF can use its standard mechanisms to find the project's .style.yapf
-  (let ((tmpfile (make-temp-file (concat default-directory executable-name)
-                                 nil (concat "." file-extension)))
-        (patchbuf (get-buffer-create (format "*%s patch*" executable-name)))
-        (errbuf (get-buffer-create (format "*%s Errors*" executable-name)))
-        (coding-system-for-read buffer-file-coding-system)
-        (coding-system-for-write buffer-file-coding-system)
-        (line-param (format "%d-%d"
-                            (line-number-at-pos start t)
-                            (line-number-at-pos end t))))
-    (with-current-buffer errbuf
-      (setq buffer-read-only nil)
-      (erase-buffer))
-    (with-current-buffer patchbuf
-      (erase-buffer))
-    (write-region nil nil tmpfile)    
+  (let ((kr-head kill-ring))
+    (kill-new "test")
+    (unwind-protect
+        (let ((tmpfile (make-temp-file (concat default-directory executable-name)
+                                       nil (concat "." file-extension)))
+              (patchbuf (get-buffer-create (format "*%s patch*" executable-name)))
+              (errbuf (get-buffer-create (format "*%s Errors*" executable-name)))
+              (coding-system-for-read buffer-file-coding-system)
+              (coding-system-for-write buffer-file-coding-system)
+              (line-param (format "%d-%d"
+                                  (line-number-at-pos start t)
+                                  (line-number-at-pos end t))))
+          (with-current-buffer errbuf
+            (setq buffer-read-only nil)
+            (erase-buffer))
+          (with-current-buffer patchbuf
+            (erase-buffer))
+          (write-region nil nil tmpfile)    
 
-    (if (or (my-py-yapf--call-executable errbuf tmpfile line-param)
-            (ignore-return-code))
-        (if (zerop (call-process-region (point-min) (point-max) "diff" nil
-                                        patchbuf nil "-n" "-" tmpfile))
-            (progn
-              (kill-buffer errbuf)
-              (pop kill-ring)
-              (message (format "Buffer is already %sed" executable-name)))
+          (if (or (my-py-yapf--call-executable errbuf tmpfile line-param)
+                  (ignore-return-code))
+              (if (zerop (call-process-region (point-min) (point-max) "diff" nil
+                                              patchbuf nil "-n" "-" tmpfile))
+                  (progn
+                    (kill-buffer errbuf)
+                    ;;(pop kill-ring)
+                    (message (format "Buffer is already %sed" executable-name)))
 
-          (py-yapf-bf--apply-rcs-patch patchbuf)          
+                (my-py-yapf-bf--apply-rcs-patch patchbuf)          
 
-          (kill-buffer errbuf)
-          (pop kill-ring)
-          (message (format "Applied %s" executable-name)))
-      (error (format "Could not apply %s. Check *%s Errors* for details"
-                     executable-name executable-name)))
-    (kill-buffer patchbuf)
-    (pop kill-ring)
-    (delete-file tmpfile)))
+                (kill-buffer errbuf)
+                ;;(pop kill-ring)
+                (message (format "Applied %s" executable-name)))
+            (error (format "Could not apply %s. Check *%s Errors* for details"
+                           executable-name executable-name)))
+          (kill-buffer patchbuf)
+          ;;(pop kill-ring)
+          (delete-file tmpfile))
+      (setq kill-ring kr-head))
+    ))
+
+(defun my-py-yapf-bf--apply-rcs-patch (patch-buffer)
+  "Apply an RCS-formatted diff from PATCH-BUFFER to the current buffer."
+  (let ((target-buffer (current-buffer))
+        (line-offset 0))
+    (save-excursion
+      (with-current-buffer patch-buffer
+        (goto-char (point-min))
+        (while (not (eobp))
+          (unless (looking-at "^\\([ad]\\)\\([0-9]+\\) \\([0-9]+\\)")
+            (error "invalid rcs patch or internal error in py-yapf-bf--apply-rcs-patch"))
+          (forward-line)
+          (let ((action (match-string 1))
+                (from (string-to-number (match-string 2)))
+                (len  (string-to-number (match-string 3))))
+            (cond
+             ((equal action "a")
+              (let ((start (point)))
+                (forward-line len)
+                (let ((text (buffer-substring start (point))))
+                  (with-current-buffer target-buffer
+                    (setq line-offset (- line-offset len))
+                    (goto-char (point-min))
+                    (forward-line (- from len line-offset))
+                    (insert text)))))
+             ((equal action "d")
+              (with-current-buffer target-buffer
+                (goto-char (point-min))
+                (forward-line (- from line-offset 1))
+                (setq line-offset (+ line-offset len))
+                (kill-whole-line len)
+                ;;(pop kill-ring)
+                ))
+             (t
+              (error "invalid rcs patch or internal error in py-yapf-bf--apply-rcs-patch")))))))))
+
 
 (require 'python)
 (define-key python-mode-map (kbd "M-q") 'my-py-yapf-region)
