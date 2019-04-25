@@ -13,12 +13,18 @@
          (append py-yapf-options `("--in-place" ,file "-l" ,line-param))))
 
 
-(defun my-py-yapf-region ()
-  "Uses the \"yapf\" tool to reformat the current buffer."
-  (interactive)
-  (if (not (use-region-p))
-      (error (format "No region selected.")))
-  (py-yapf-bf--apply-executable-to-buffer "yapf.sh" 'py-yapf--call-executable t "py" t))
+(defun my-py-yapf-region (start end &optional arg)
+  "Uses the \"yapf\" tool to reformat the current region."
+  (interactive
+   (if (use-region-p)
+       (list (region-beginning) (region-end) current-prefix-arg)
+     (list (point) (point) current-prefix-arg)))
+  ;; (if (not (use-region-p))
+  ;;     (error (format "No region selected.")))
+  (if arg
+      (my-py-yapf-bf--apply-executable-to-buffer (point-min) (point-max) "yapf.sh" 'py-yapf--call-executable t "py" t)
+    (my-py-yapf-bf--apply-executable-to-buffer start end "yapf.sh" 'py-yapf--call-executable t "py" t)
+    ))
 
 (defalias 'my-py-yapf--bufferpos-to-filepos
   (if (fboundp 'bufferpos-to-filepos)
@@ -33,66 +39,13 @@
       (byte-to-position (1+ byte)))))
 
 
-(defun py-yapf-bf--apply-executable-to-buffer2 (executable-name
-                                           executable-call
-                                           only-on-region
-                                           file-extension
-                                           ignore-return-code)
-  "Formats the current buffer according to the executable"
-  ;; (when (not (executable-find executable-name))
-  ;;   (error (format "%s command not found." executable-name)))
-  ;; Make sure tempfile is an absolute path in the current directory so that
-  ;; YAPF can use its standard mechanisms to find the project's .style.yapf
-
-  (let* ((tmpfile (make-temp-file (concat default-directory executable-name)
-                                 nil (concat "." file-extension)))
-        (patchbuf (get-buffer-create (format "*%s patch*" executable-name)))
-        (errbuf (get-buffer-create (format "*%s Errors*" executable-name)))
-        (coding-system-for-read buffer-file-coding-system)
-        (coding-system-for-write buffer-file-coding-system)
-        ;; (region-start (my-py-yapf--bufferpos-to-filepos (region-beginning) 'approximate
-        ;;                                               'utf-8-unix))
-        ;; (region-end (my-py-yapf--bufferpos-to-filepos (region-end) 'approximate
-        ;;                                             'utf-8-unix))
-        (line-param (format "%d-%d"
-                            (line-number-at-pos (region-beginning) t)
-                            (line-number-at-pos (region-end) t)))
-        )
-    (with-current-buffer errbuf
-      (setq buffer-read-only nil)
-      (erase-buffer))
-    (with-current-buffer patchbuf
-      (erase-buffer))
-    (write-region nil nil tmpfile)
-    (unwind-protect
-        (let ((status (call-process-region
-                       (point-min) (point-max)
-                       my-py-yapf-executable
-                       t               ; don't delete
-                       t               ; buffer
-                       ;;`(t ,errbuf) ; current buffer
-                       ;;`(,temp-buffer ,temp-file)
-                       t ;; DISPLAY
-                       tmpfile
-                       "-l"
-                       line-param
-                       )))
-          (cond
-           ((stringp status)
-            (error "(format killed by signal %s)" status))
-           ((not (zerop status))
-            (error "(format failed with code %d)" status)))
-          (message "status - 0")
-          )
-      ;;(delete-file tmpfile)
-      )
-    ))
-
-(defun py-yapf-bf--apply-executable-to-buffer (executable-name
-                                           executable-call
-                                           only-on-region
-                                           file-extension
-                                           ignore-return-code)
+(defun my-py-yapf-bf--apply-executable-to-buffer (start
+                                                  end
+                                                  executable-name
+                                                  executable-call
+                                                  only-on-region
+                                                  file-extension
+                                                  ignore-return-code)
   "Formats the current buffer according to the executable"
   ;; (when (not (executable-find executable-name))
   ;;   (error (format "%s command not found." executable-name)))
@@ -105,8 +58,8 @@
         (coding-system-for-read buffer-file-coding-system)
         (coding-system-for-write buffer-file-coding-system)
         (line-param (format "%d-%d"
-                            (line-number-at-pos (region-beginning) t)
-                            (line-number-at-pos (region-end) t))))
+                            (line-number-at-pos start t)
+                            (line-number-at-pos end t))))
     (with-current-buffer errbuf
       (setq buffer-read-only nil)
       (erase-buffer))
