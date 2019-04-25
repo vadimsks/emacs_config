@@ -14,12 +14,13 @@
                 (append py-yapf-options `("--in-place" ,file "-l" ,line-param)))))
     (cond
      ((stringp status)
-      (error "(yapf killed by signal %s)" status)
+      (message "(yapf killed by signal %s)" status)
       nil)
      ((not (zerop status))
-      (error "(yapf failed with code %d)" status)
+      (message "(yapf failed with code %d)" status)
       nil)
-     ( t t ))
+     (t
+      t))
     ;;(message (format "status: %s" status))
     ;;status
     ))
@@ -34,8 +35,8 @@
   ;; (if (not (use-region-p))
   ;;     (error (format "No region selected.")))
   (if arg
-      (my-py-yapf-bf--apply-executable-to-buffer (point-min) (point-max) "yapf.sh" 'py-yapf--call-executable t "py" t)
-    (my-py-yapf-bf--apply-executable-to-buffer start end "yapf.sh" 'py-yapf--call-executable t "py" t)
+      (my-py-yapf-bf--apply-executable-to-buffer (point-min) (point-max) "yapf.sh" 'py-yapf--call-executable "py" nil)
+    (my-py-yapf-bf--apply-executable-to-buffer start end "yapf.sh" 'py-yapf--call-executable "py" nil)
     ))
 
 (defalias 'my-py-yapf--bufferpos-to-filepos
@@ -55,7 +56,6 @@
                                                   end
                                                   executable-name
                                                   executable-call
-                                                  only-on-region
                                                   file-extension
                                                   ignore-return-code)
   "Formats the current buffer according to the executable"
@@ -63,13 +63,13 @@
   ;;   (error (format "%s command not found." executable-name)))
   ;; Make sure tempfile is an absolute path in the current directory so that
   ;; YAPF can use its standard mechanisms to find the project's .style.yapf
-  (let ((kr-head kill-ring))
+  (let ((kr-head kill-ring)
+        (tmpfile (make-temp-file (concat default-directory executable-name)
+                                 nil (concat "." file-extension)))
+        (patchbuf (get-buffer-create (format "*%s patch*" executable-name))))
     (kill-new "test")
     (unwind-protect
-        (let ((tmpfile (make-temp-file (concat default-directory executable-name)
-                                       nil (concat "." file-extension)))
-              (patchbuf (get-buffer-create (format "*%s patch*" executable-name)))
-              (errbuf (get-buffer-create (format "*%s Errors*" executable-name)))
+        (let ((errbuf (get-buffer-create (format "*%s Errors*" executable-name)))
               (coding-system-for-read buffer-file-coding-system)
               (coding-system-for-write buffer-file-coding-system)
               (line-param (format "%d-%d"
@@ -83,25 +83,24 @@
           (write-region nil nil tmpfile)    
 
           (if (or (my-py-yapf--call-executable errbuf tmpfile line-param)
-                  (ignore-return-code))
+                  ignore-return-code)
               (if (zerop (call-process-region (point-min) (point-max) "diff" nil
                                               patchbuf nil "-n" "-" tmpfile))
                   (progn
                     (kill-buffer errbuf)
-                    ;;(pop kill-ring)
                     (message (format "Buffer is already %sed" executable-name)))
 
                 (my-py-yapf-bf--apply-rcs-patch patchbuf)          
 
                 (kill-buffer errbuf)
-                ;;(pop kill-ring)
                 (message (format "Applied %s" executable-name)))
             (error (format "Could not apply %s. Check *%s Errors* for details"
                            executable-name executable-name)))
-          (kill-buffer patchbuf)
-          ;;(pop kill-ring)
-          (delete-file tmpfile))
-      (setq kill-ring kr-head))
+          )
+      (kill-buffer patchbuf)
+      (delete-file tmpfile)
+      (setq kill-ring kr-head)
+      )
     ))
 
 (defun my-py-yapf-bf--apply-rcs-patch (patch-buffer)
