@@ -9,8 +9,20 @@
 
 ;; override
 (defun my-py-yapf--call-executable (errbuf file line-param)
-  (apply 'call-process my-py-yapf-executable nil errbuf nil
-         (append py-yapf-options `("--in-place" ,file "-l" ,line-param))))
+  (let ((status
+         (apply 'call-process my-py-yapf-executable nil errbuf nil
+                (append py-yapf-options `("--in-place" ,file "-l" ,line-param)))))
+    (cond
+     ((stringp status)
+      (error "(yapf killed by signal %s)" status)
+      nil)
+     ((not (zerop status))
+      (error "(yapf failed with code %d)" status)
+      nil)
+     ( t t ))
+    ;;(message (format "status: %s" status))
+    ;;status
+    ))
 
 
 (defun my-py-yapf-region (start end &optional arg)
