@@ -24,8 +24,8 @@
   " "
   (interactive)
 ;  (outline-back-to-heading)
-  (show-children)
-  (show-entry)
+  (outline-show-children)
+  (outline-show-entry)
 
   (let ((my-found)
         (my-level (funcall outline-level)))
