@@ -1,5 +1,7 @@
 ;; todo compare with ccls
 
+;; lsp-find-references
+
 ;; temp files /tmp/preamble*.pch
 
 ;; (use-package eglot
@@ -16,7 +18,8 @@
 
 (use-package lsp-mode :ensure t :commands lsp)
 ;;(use-package lsp-ui :commands lsp-ui-mode)
-;;(use-package company-lsp :commands company-lsp)
+(use-package company-lsp :ensure t :commands company-lsp)
+(push 'company-lsp company-backends)
 
 (use-package ccls
   :ensure t

@@ -5,8 +5,8 @@
 
 ; clang backend
 ;(setq company-backends (delete 'company-semantic company-backends))
-;(define-key c-mode-map  [(tab)] 'company-complete)
-;(define-key c++-mode-map  [(tab)] 'company-complete)
+;(define-key c-mode-map  (kbd "M-/") 'company-complete)
+;(define-key c++-mode-map  (kbd "M-/") 'company-complete)
 
 (setq completion-ignored-extensions
       '(".o" ".elc" "~" ".bin" ".class" ".exe" ".ps" ".abs" ".mx"
@@ -41,7 +41,13 @@
   (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
   ;;(define-key c-mode-map  [(tab)] 'company-capf)
   ;;(define-key c++-mode-map  [(tab)] 'company-capf)
+  (define-key c-mode-map  (kbd "M-/") 'company-complete)
+  (define-key c++-mode-map  (kbd "M-/") 'company-complete)
   (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
   (define-key company-active-map (kbd "S-TAB") 'company-select-previous)
   (define-key company-active-map (kbd "<backtab>") 'company-select-previous)
+
+  :hook ((c-mode c++-mode objc-mode) .
+          (lambda () (require 'company) (company-mode)))
+
   )
