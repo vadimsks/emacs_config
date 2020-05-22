@@ -53,3 +53,7 @@
 ;; bookmark shortcuts
 ;; C-x r l - bookmark-list
 ;; C-x r b - bookmark-jump
+;; C-c . - sr-checkpoint-restore
+
+;; reload default bookmark file:
+;; (bookmark-load bookmark-default-file 't )
