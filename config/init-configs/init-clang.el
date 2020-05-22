@@ -49,6 +49,11 @@
           )
       (message "Cannot find clang in %s" my-clang-dir) ) ) )
 
+;;(setq clang-format-executable "/home/developer/work/clang/sources/llvm-project-llvmorg-8.0.1/build/bin/clang-format")
+;;(setq clang-format-executable "/home/developer/disks/VOL/work/clang/build/bin/clang-format")
+(setq clang-format-executable "/home/developer/disks/VOL/work/clang/build/bin/clang-format.sh")
+
+
 ;; eglot - starts clangd, requires <root>/compile_commands.json
 ;; xref-find-definitions
 ;; company-capf
