@@ -33,7 +33,7 @@
   "Generate a the bookmark record for a new sr bookmark."
   `(
     (sr-directories . (,sr-this-directory))
-    (filename . ,(format "Sunrise - %s"
+    (filename . ,(format "Sunrise: %s"
                          sr-this-directory))
     (handler . my-sr-bookmark-handler)))
 
@@ -44,8 +44,14 @@
 ;;   (sr-history-push default-directory)
 ;;   (sr-in-other (sr-history-push default-directory)))
 
-(define-key sr-mode-map [(control >)]         'my-sr-checkpoint-save)
+(define-key sr-mode-map "\C-c>"                 'my-sr-checkpoint-save)
 ;;(define-key sr-mode-map [(control .)]         'my-sr-checkpoint-restore)
+
+
+;; don't interact with mouse
+(setq sr-cursor-follows-mouse nil)
+(define-key sr-mode-map [mouse-1]        nil)
+(define-key sr-mode-map [mouse-movement] nil)
 
 
 ;; TODO - override bookmark-alist in the (defun bookmark-completing-read (prompt &optional default)...)
@@ -53,7 +59,9 @@
 ;; bookmark shortcuts
 ;; C-x r l - bookmark-list
 ;; C-x r b - bookmark-jump
-;; C-c . - sr-checkpoint-restore
+;; C-c .   - sr-checkpoint-restore
+;; C-c >   - my-sr-checkpoint-save
+;; C-u C-c > - save both panels
 
 ;; reload default bookmark file:
 ;; (bookmark-load bookmark-default-file 't )
