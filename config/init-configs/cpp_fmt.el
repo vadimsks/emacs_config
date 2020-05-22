@@ -103,3 +103,7 @@
     (yas-expand-snippet template (point-min) (point-max) expand-env)) )
 
 ;;(yas-lookup-snippet "and")
+
+
+(define-key c-mode-map (kbd "\C-cm") 'helm-semantic-or-imenu)
+(define-key c++-mode-map (kbd "\C-cm") 'helm-semantic-or-imenu)
