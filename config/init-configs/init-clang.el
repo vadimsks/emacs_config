@@ -23,8 +23,8 @@
 
 (use-package ccls
   :ensure t
-  :hook ((c-mode c++-mode objc-mode) .
-          (lambda () (require 'ccls) (lsp)))
+;;  :hook ((c-mode c++-mode objc-mode) .
+;;          (lambda () (require 'ccls) (lsp)))
   )
 
 ;; (require 'ccls)
