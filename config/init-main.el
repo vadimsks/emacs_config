@@ -259,4 +259,4 @@
 (my-load-init-config "init-clang.el")
 
 (my-load-init-config "init-html.el")
-(my-load-init-config "init-python.el")
+;;(my-load-init-config "init-typescript.el")
