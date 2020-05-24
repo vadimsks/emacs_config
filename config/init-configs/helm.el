@@ -179,3 +179,17 @@
 
 
 ;; (define-key sr-mode-map "\C-x\C-f"    'helm-find-file)
+
+
+;; don't reorder buffers list
+;; (defun helm-buffers-sort-transformer (candidates _source)
+;;   (if (string= helm-pattern "")
+;;       candidates
+;;     (sort candidates
+;;           (lambda (s1 s2)
+;;               (< (string-width s1) (string-width s2))))))
+
+(defun helm-buffers-sort-transformer@donot-sort (_ candidates _)
+  candidates)
+
+(advice-add 'helm-buffers-sort-transformer :around 'helm-buffers-sort-transformer@donot-sort)
