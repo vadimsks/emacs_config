@@ -53,6 +53,10 @@
 (define-key sr-mode-map [mouse-1]        nil)
 (define-key sr-mode-map [mouse-movement] nil)
 
+;; Fixed M-backspace in eshell
+;; TODO: ls -la -> ls
+(define-key sr-term-line-minor-mode-map [M-backspace] 'backward-kill-word)
+
 
 ;; TODO - override bookmark-alist in the (defun bookmark-completing-read (prompt &optional default)...)
 
