@@ -54,3 +54,11 @@
     ))
 
 (global-set-key (kbd "C-q") 'my-ctrl-q-handler)
+
+
+;; =======================================================================
+
+(use-package expand-region :ensure t)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+;; (message "my-ctrl-q-handler _arg=%s" _arg )
