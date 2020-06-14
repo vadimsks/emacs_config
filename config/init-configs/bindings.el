@@ -59,3 +59,16 @@
 
 ;; eshell
 (global-set-key (kbd "C-c t") 'my-eshell-fnc)
+
+
+;; Use shell-like backspace C-h, rebind help to F1
+(define-key key-translation-map [?\C-h] [?\C-?])
+(global-set-key (kbd "<f1>") 'help-command)
+
+(defun kill-region-or-backward-word ()
+  (interactive)
+  (if (region-active-p)
+      (kill-region (region-beginning) (region-end))
+    (backward-kill-word 1)))
+
+(global-set-key (kbd "M-h") 'kill-region-or-backward-word)
