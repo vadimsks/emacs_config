@@ -49,8 +49,8 @@
   (interactive "P")
   ;; (message "my-ctrl-q-handler _arg=%s" _arg )
   (if _arg
-      (funcall-interactively 'quoted-insert 1)
-    (feng-goto-last-change)
+      (feng-goto-last-change)
+    (funcall-interactively 'quoted-insert 1)
     ))
 
 (global-set-key (kbd "C-q") 'my-ctrl-q-handler)
