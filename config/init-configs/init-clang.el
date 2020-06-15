@@ -10,7 +10,8 @@
 
 (let ((candidates '(
                     "~/work/clang/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-16.04"
-                    "~/work/clang/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-18.04" ) ))
+                    "~/work/clang/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-18.04"
+                    "~/work/clang9") ))
   (setq my-clang-dir (seq-find (lambda (elt) (file-exists-p elt)) candidates) )
   )
 
@@ -51,7 +52,8 @@
 
 ;;(setq clang-format-executable "/home/developer/work/clang/sources/llvm-project-llvmorg-8.0.1/build/bin/clang-format")
 ;;(setq clang-format-executable "/home/developer/disks/VOL/work/clang/build/bin/clang-format")
-(setq clang-format-executable "/home/developer/disks/VOL/work/clang/build/bin/clang-format.sh")
+;;(setq clang-format-executable "/home/developer/disks/VOL/work/clang/build/bin/clang-format.sh")
+(setq clang-format-executable "clang-format.sh")
 
 
 ;; eglot - starts clangd, requires <root>/compile_commands.json
