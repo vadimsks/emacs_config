@@ -28,6 +28,8 @@
 ;;          (lambda () (require 'ccls) (lsp)))
   )
 
+(push "[/\\\\]build$" lsp-file-watch-ignored)
+
 ;; (require 'ccls)
 
 (when my-clang-dir
