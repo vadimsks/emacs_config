@@ -5,7 +5,7 @@
 
 ;;(add-hook 'python-mode-hook 'py-yapf-enable-on-save)
 
-(setq my-py-yapf-executable (expand-file-name "~/work/python/yapf.sh"))
+(setq my-py-yapf-executable (expand-file-name "~/local/bin/yapf.sh"))
 
 ;; override
 (defun my-py-yapf--call-executable (errbuf file line-param)
