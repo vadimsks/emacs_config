@@ -21,3 +21,18 @@
 
 ;; Transients
 ;; https://github.com/magit/magit/wiki/Converting-popup-modifications-to-transient-modifications
+
+;; full screen magit-status
+(defun magit-status-fullscreen (prefix)
+  (interactive "P")
+  (magit-status)
+  (unless prefix
+    (delete-other-windows)))
+
+;; move cursor into position when entering commit message
+(defun my/magit-cursor-fix ()
+  (beginning-of-buffer)
+  (when (looking-at "#")
+    (forward-line 2)))
+
+(add-hook 'git-commit-mode-hook 'my/magit-cursor-fix)
