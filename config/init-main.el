@@ -9,8 +9,18 @@
 ;; (setq load-path (cons (expand-file-name "~/.emacs.d/el/company-0.9.9") load-path))
 
 
-
+;; Setup package.el
 (require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(package-initialize)
+
+;; Bootstrap `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;(require 'package)
 ;; (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
 ;;                     (not (gnutls-available-p))))
 ;;        (proto (if no-ssl "http" "https")))
@@ -27,9 +37,9 @@
 ;;   (when (< emacs-major-version 24)
 ;;     ;; For important compatibility libraries like cl-lib
 ;;     (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+;; (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 ;; (setq package-archives '(("melpa" . "http://melpa.org/packages/")) )
-(package-initialize)
+;; (package-initialize)
 ;;package-archives
 ;;package-check-signature
 
@@ -259,4 +269,5 @@
 (my-load-init-config "init-clang.el")
 
 (my-load-init-config "init-html.el")
+(my-load-init-config "init-python.el")
 ;;(my-load-init-config "init-typescript.el")
