@@ -73,3 +73,8 @@ means to createa new session.  Returns the buffer selected (or created)."
 ;; redefine ?- and ?. as word Word constituents ( 'w' )
 ;; (modify-syntax-entry ?- "w   " eshell-mode-syntax-table)
 ;; (modify-syntax-entry ?. "w   " eshell-mode-syntax-table)
+
+
+;; TODO
+;;(add-hook 'eshell-mode-hook
+;;          '(lambda () (define-key eshell-mode-map "\C-\M-h" 'kill-region-or-backward-word)))
