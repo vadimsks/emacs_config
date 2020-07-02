@@ -131,13 +131,11 @@
 ;;                   newname))))
 ;;       ffap-alist)
 
-;;(add-to-list 'compilation-search-path "/home/developer/Kili")
 ;;compilation-search-path
 ;;compilation-directory-matcher
 ;; default-directory
 ;(setq compilation-search-path '(nil))
 ;(setq compilation-directory-matcher '(nil))
-;;(setq default-directory "/home/developer/Kili")
 ;; C-c p f
 ;; C-c p a - other file
 ;; C-c p p - select project
@@ -159,7 +157,6 @@
 
 ;; how to set buffer local project root
 ;; M-x eval-expression
-;; (setq projectile-project-root "~/Kili" )
                                            
 
 ;; TODO

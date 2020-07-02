@@ -1,5 +1,5 @@
 ;; .emacs contents
-;; (setq custom-file "/home/developer/work/emacs/emacs_config/config/init-main.el")
+;; (setq custom-file "/home/user/work/emacs/emacs_config/config/init-main.el")
 ;; (load custom-file 'noerror)
 
 
