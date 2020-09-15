@@ -263,6 +263,7 @@
 (my-load-init-config "autosave.el")
 (my-load-init-config "init-eshell.el")
 (my-load-init-config "org.el")
+(my-load-init-config "init-pdf.el")
 (my-load-init-config "browse-url.el")
 (my-load-init-config "bindings.el")
 (my-load-init-config "init-modes.el")
