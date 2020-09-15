@@ -57,6 +57,7 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; eshell
+(require 'eshell)
 (global-set-key (kbd "C-c t") 'my-eshell-fnc)
 
 
