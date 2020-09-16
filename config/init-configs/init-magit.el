@@ -2,6 +2,7 @@
   :ensure t
   :config
   (global-set-key (kbd "C-x g") 'magit-status)
+  (setq magit-diff-refine-hunk t)
   )
 
 ;; customize-variable magit-completing-read-function
