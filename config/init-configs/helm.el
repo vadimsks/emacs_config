@@ -193,3 +193,6 @@
   candidates)
 
 (advice-add 'helm-buffers-sort-transformer :around 'helm-buffers-sort-transformer@donot-sort)
+
+(helm-mode)
+
