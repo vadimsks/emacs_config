@@ -17,20 +17,26 @@
 
 ;; (setq my-ccls-dir "~/disks/VOL/work/ccls/ccls" )
 
-(use-package lsp-mode :ensure t :commands lsp)
+(use-package lsp-mode
+  :ensure t
+  :commands lsp
+  :config
+  (push "[/\\\\]build$" lsp-file-watch-ignored)
+  (setq lsp-clients-clangd-executable "~/work/clang11/clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-16.04/bin/clangd" )
+  )
+
 ;;(use-package lsp-ui :commands lsp-ui-mode)
-(use-package company-lsp :ensure t :commands company-lsp)
-(push 'company-lsp company-backends)
+
+;; performance optimization - https://emacs-lsp.github.io/lsp-mode/page/performance/
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+(setq lsp-completion-provider :capf)
 
 (use-package ccls
   :ensure t
 ;;  :hook ((c-mode c++-mode objc-mode) .
 ;;          (lambda () (require 'ccls) (lsp)))
   )
-
-(push "[/\\\\]build$" lsp-file-watch-ignored)
-
-;; (require 'ccls)
 
 (when my-clang-dir
   (let* ((dir (expand-file-name my-clang-dir))
