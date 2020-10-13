@@ -1,5 +1,3 @@
-;; todo compare with ccls
-
 ;; lsp-find-references
 
 ;; temp files /tmp/preamble*.pch
@@ -14,8 +12,6 @@
                     "~/work/clang9") ))
   (setq my-clang-dir (seq-find (lambda (elt) (file-exists-p elt)) candidates) )
   )
-
-;; (setq my-ccls-dir "~/disks/VOL/work/ccls/ccls" )
 
 (use-package lsp-mode
   :ensure t
@@ -58,9 +54,6 @@
           )
       (message "Cannot find clang in %s" my-clang-dir) ) ) )
 
-;;(setq clang-format-executable "/home/developer/work/clang/sources/llvm-project-llvmorg-8.0.1/build/bin/clang-format")
-;;(setq clang-format-executable "/home/developer/disks/VOL/work/clang/build/bin/clang-format")
-;;(setq clang-format-executable "/home/developer/disks/VOL/work/clang/build/bin/clang-format.sh")
 (setq clang-format-executable "clang-format.sh")
 
 
