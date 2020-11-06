@@ -61,5 +61,8 @@
 ;; xref-find-definitions
 ;; company-capf
 
+;;; cmake
 (use-package cmake-mode
   :ensure t)
+(setq cmake-tab-width 4)
+

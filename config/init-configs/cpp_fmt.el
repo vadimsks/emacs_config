@@ -35,10 +35,6 @@
 
 (setq which-function-mode t)
 
-
-;;; cmake
-(setq cmake-tab-width 4)
-
 (defun my-c-mode-hook ()
   (c-set-offset 'innamespace 0)
   (c-set-offset 'case-label '+)
