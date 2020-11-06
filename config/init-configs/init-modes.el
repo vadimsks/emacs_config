@@ -89,3 +89,6 @@
 (setq avy-style 'pre)
 (setq avy-all-windows nil)
 (setq avy-timeout-seconds 0.5)
+(setq avy-orders-alist
+      '((avy-goto-char-timer . avy-order-closest)
+        (avy-goto-word-0 . avy-order-closest)))
