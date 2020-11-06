@@ -74,3 +74,18 @@
 ;; (global-set-key (kbd "M-t p") 'transpose-params)
 
 
+
+;; avy
+(use-package avy
+  :ensure t
+  :bind (
+         ;;("M-g w" . avy-goto-word-1)
+         ("M-g M-g" . avy-goto-char-timer)
+         ))
+
+(global-set-key (kbd "M-g M-g") 'avy-goto-char-timer)
+(global-set-key (kbd "M-g a") 'avy-resume)
+(global-set-key (kbd "M-g l") 'avy-goto-line)
+(setq avy-style 'pre)
+(setq avy-all-windows nil)
+(setq avy-timeout-seconds 0.5)
