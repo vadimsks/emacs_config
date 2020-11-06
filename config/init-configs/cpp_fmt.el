@@ -25,6 +25,7 @@
 (add-hook 'c-mode-common-hook
               (lambda () 
                 (setq indent-tabs-mode nil)
+                (modify-syntax-entry ?_ "w") ; underscore as word
 ;                (c-set-offset 'case-label '+) ;indent case labels by c-indent-level, too
                 ))
 ;; smart-indent-mode - end
