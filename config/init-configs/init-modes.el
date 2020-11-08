@@ -145,6 +145,7 @@
          ;;("M-g w" . avy-goto-word-1)
          ("M-g M-g" . avy-goto-char-timer)
          ))
+(require 'avy)
 
 (global-set-key (kbd "M-g M-g") 'avy-goto-char-timer)
 (global-set-key (kbd "M-g a") 'avy-resume)
