@@ -87,8 +87,26 @@
 (global-set-key (kbd "M-g a") 'avy-resume)
 (global-set-key (kbd "M-g l") 'avy-goto-line)
 (setq avy-style 'pre)
+;;(setq avy-style 'de-bruijn)
 (setq avy-all-windows nil)
 (setq avy-timeout-seconds 0.5)
 (setq avy-orders-alist
       '((avy-goto-char-timer . avy-order-closest)
         (avy-goto-word-0 . avy-order-closest)))
+
+(defun avy-goto-char-timer (&optional arg)
+  "Read one or many consecutive chars and jump to the first one.
+The window scope is determined by `avy-all-windows' (ARG negates it)."
+  (interactive "P")
+  (let ((avy-all-windows (if arg
+                             (not avy-all-windows)
+                           avy-all-windows)))
+    (avy-with avy-goto-char-timer
+      (setq avy--old-cands (avy--read-candidates))
+;;;(avy-process avy--old-cands)
+      (let ((avy-command 'avy-goto-char-timer)) ;;
+        (avy-process (copy-tree avy--old-cands)))
+      )))
+
+
+
