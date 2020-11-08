@@ -1,5 +1,5 @@
 #!/bin/bash
 
-DIR=/home/developer/work/python/yapf
+DIR=$HOME/work/python/yapf
 PYTHONPATH=$DIR python $DIR/yapf $@
 

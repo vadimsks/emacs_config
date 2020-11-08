@@ -56,7 +56,6 @@
 
 (setq clang-format-executable "clang-format.sh")
 
-
 ;; eglot - starts clangd, requires <root>/compile_commands.json
 ;; xref-find-definitions
 ;; company-capf

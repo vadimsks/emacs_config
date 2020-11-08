@@ -1,5 +1,5 @@
 ;; .emacs contents
-;; (setq custom-file "/home/developer/work/emacs/emacs_config/config/init-main.el")
+;; (setq custom-file "/home/user/work/emacs/emacs_config/config/init-main.el")
 ;; (load custom-file 'noerror)
 
 
@@ -263,6 +263,7 @@
 (my-load-init-config "autosave.el")
 (my-load-init-config "init-eshell.el")
 (my-load-init-config "org.el")
+;(my-load-init-config "init-pdf.el")
 (my-load-init-config "browse-url.el")
 (my-load-init-config "bindings.el")
 (my-load-init-config "init-modes.el")

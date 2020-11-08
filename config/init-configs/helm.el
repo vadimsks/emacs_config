@@ -136,7 +136,7 @@
 ;; default-directory
 ;(setq compilation-search-path '(nil))
 ;(setq compilation-directory-matcher '(nil))
-;;(setq default-directory "/home/developer/app")
+;;(setq default-directory "/home/user/app")
 ;; C-c p f
 ;; C-c p a - other file
 ;; C-c p p - select project

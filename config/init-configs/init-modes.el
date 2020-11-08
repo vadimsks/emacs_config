@@ -59,7 +59,55 @@
 ;; =======================================================================
 
 (use-package expand-region :ensure t)
+(require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
+
+
+(defun my/mark-one-param ()
+  ;;(defun er/mark-inside-pairs ()
+  "Mark inside pairs (as defined by the mode), not including the pairs."
+  (interactive)
+  (when (er--point-inside-pairs-p)
+
+    (let* (start end inside-paren)
+      (save-excursion
+        (goto-char (nth 1 (syntax-ppss)))
+        (setq start (point))
+        (setq inside-paren (looking-at "("))
+        (when inside-paren
+          (forward-list)
+          (setq end (point)) )
+        )
+      (when inside-paren
+        (set-mark (save-excursion 
+                    (skip-chars-backward "^(,)" start)
+                    (forward-char)
+                    (skip-chars-forward er--space-str)
+                    (message "p1 %s" (point) )
+                    (point)))
+
+        (skip-chars-forward "^(,)" end )
+        (skip-chars-backward er--space-str)
+
+        (message "p2 %s" (point) )
+            
+        (exchange-point-and-mark)
+        
+        )
+      )
+    )
+  )
+
+(defun er/add-cc-mode-expansions ()
+  "Adds expansions for buffers in c-mode."
+  (set (make-local-variable 'er/try-expand-list)
+       (append er/try-expand-list
+               '(my/mark-one-param
+                 er/c-mark-statement
+                 er/c-mark-fully-qualified-name
+                 er/c-mark-function-call-1   er/c-mark-function-call-2
+                 er/c-mark-statement-block-1 er/c-mark-statement-block-2
+                 er/c-mark-vector-access-1   er/c-mark-vector-access-2))))
 
 ;; (message "my-ctrl-q-handler _arg=%s" _arg )
 
@@ -73,7 +121,22 @@
 ;; (global-set-key (kbd "M-t s") 'transpose-sexps)
 ;; (global-set-key (kbd "M-t p") 'transpose-params)
 
-
+;; =======================================================================
+(progn
+  (defun boundary ()
+    (and      (= (char-syntax (char-after))  ?w)
+         (not (= (char-syntax (char-before)) ?w))))
+  (defun my-forward-word ()
+    (interactive) 
+    (while (progn (forward-char)  (not (boundary)))))
+  (defun my-backward-word ()
+    (interactive) 
+    (while (progn (backward-char) (not (boundary)))))
+  ;; (global-unset-key (kbd "M-f"))
+  ;;(global-unset-key (kbd "M-b"))
+  (global-set-key (kbd "M-f") 'my-forward-word)
+  (global-set-key (kbd "M-b")  'my-backward-word)
+  )
 
 ;; avy
 (use-package avy
@@ -107,6 +170,5 @@ The window scope is determined by `avy-all-windows' (ARG negates it)."
       (let ((avy-command 'avy-goto-char-timer)) ;;
         (avy-process (copy-tree avy--old-cands)))
       )))
-
 
 
