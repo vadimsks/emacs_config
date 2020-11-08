@@ -122,3 +122,22 @@
 ;; (global-set-key (kbd "M-t p") 'transpose-params)
 
 
+
+
+;; =======================================================================
+(progn
+  (defun boundary ()
+    (and      (= (char-syntax (char-after))  ?w)
+         (not (= (char-syntax (char-before)) ?w))))
+  (defun my-forward-word ()
+    (interactive) 
+    (while (progn (forward-char)  (not (boundary)))))
+  (defun my-backward-word ()
+    (interactive) 
+    (while (progn (backward-char) (not (boundary)))))
+  ;; (global-unset-key (kbd "M-f"))
+  ;;(global-unset-key (kbd "M-b"))
+  (global-set-key (kbd "M-f") 'my-forward-word)
+  (global-set-key (kbd "M-b")  'my-backward-word)
+  )
+
