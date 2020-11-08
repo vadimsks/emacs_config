@@ -272,4 +272,6 @@
 (my-load-init-config "init-html.el")
 (my-load-init-config "init-python.el")
 ;;(my-load-init-config "init-typescript.el")
+
+;(my-load-init-config "init-org-roam.el")
 (my-load-init-config "init-beancount.el")
