@@ -50,8 +50,8 @@
           )
       (message "Cannot find clang in %s" my-clang-dir) ) ) )
 
-(setq clang-format-executable "clang-format.sh")
 
+(setq clang-format-executable "clang-format.sh")
 
 ;; eglot - starts clangd, requires <root>/compile_commands.json
 ;; xref-find-definitions
