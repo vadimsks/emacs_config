@@ -1,4 +1,7 @@
 ;; sunrise
+(if (eq system-type 'windows-nt)
+    (setq load-path (cons (expand-file-name "~/.el") load-path))
+  )
 (require 'sunrise-commander)
 
 (add-to-list 'auto-mode-alist '("\\.srvm\\'" . sr-virtual-mode))
@@ -56,6 +59,12 @@
 ;; Fixed M-backspace in eshell
 ;; TODO: ls -la -> ls
 (define-key sr-term-line-minor-mode-map [M-backspace] 'backward-kill-word)
+
+(if (eq system-type 'windows-nt)
+    (progn
+      ;; WinContextMenu.el
+      (load "c:/working/WinContextMenu/WinContextMenu/WinContextMenu/lisp/WinContextMenu.el")
+      ))
 
 
 ;; TODO - override bookmark-alist in the (defun bookmark-completing-read (prompt &optional default)...)
