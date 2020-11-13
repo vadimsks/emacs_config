@@ -148,12 +148,13 @@
 (require 'avy)
 
 (global-set-key (kbd "M-g M-g") 'avy-goto-char-timer)
+(global-set-key (kbd "C-;") 'avy-goto-char-timer)
 (global-set-key (kbd "M-g a") 'avy-resume)
 (global-set-key (kbd "M-g l") 'avy-goto-line)
-(setq avy-style 'pre)
+(setq avy-style 'at-full)
 ;;(setq avy-style 'de-bruijn)
-(setq avy-all-windows nil)
-(setq avy-timeout-seconds 0.5)
+(setq avy-all-windows t)
+(setq avy-timeout-seconds 0.3)
 (setq avy-orders-alist
       '((avy-goto-char-timer . avy-order-closest)
         (avy-goto-word-0 . avy-order-closest)))
