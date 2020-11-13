@@ -331,11 +331,13 @@
 (my-load-init-config "browse-url.el")
 (my-load-init-config "bindings.el")
 (my-load-init-config "init-modes.el")
-;; (my-load-init-config "init-clang.el")
+(if (not (eq system-type 'windows-nt))
+    (progn
+      (my-load-init-config "init-clang.el")
 
-;; (my-load-init-config "init-html.el")
-;; (my-load-init-config "init-python.el")
-;; ;;(my-load-init-config "init-typescript.el")
-
-;; ;(my-load-init-config "init-org-roam.el")
-;; (my-load-init-config "init-beancount.el")
+      (my-load-init-config "init-html.el")
+      (my-load-init-config "init-python.el")
+      ;; (my-load-init-config "init-typescript.el")
+      ;; (my-load-init-config "init-org-roam.el")
+      ;; (my-load-init-config "init-beancount.el")
+      ))
