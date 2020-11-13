@@ -134,8 +134,8 @@
     (while (progn (backward-char) (not (boundary)))))
   ;; (global-unset-key (kbd "M-f"))
   ;;(global-unset-key (kbd "M-b"))
-  (global-set-key (kbd "M-f") 'my-forward-word)
-  (global-set-key (kbd "M-b")  'my-backward-word)
+  (global-set-key (kbd "C-M-f") 'my-forward-word)
+  (global-set-key (kbd "C-M-b")  'my-backward-word)
   )
 
 ;; avy
