@@ -177,3 +177,5 @@ The window scope is determined by `avy-all-windows' (ARG negates it)."
       )))
 
 
+;; comment-region
+(global-set-key (kbd "C-c C-c") 'comment-region)
