@@ -6,6 +6,8 @@
 ; whitespace-mode
                                         ; tabify
 
+;; =======================================================================
+
 ;;; record two different file's last change. cycle them
 ;; from http://shenfeng.me/emacs-last-edit-location.html
 
@@ -35,6 +37,7 @@
   (let ((bfn (buffer-file-name))
         (file (car feng-last-change-pos1)))
     (when bfn
+      (message "feng-buffer-change-hook %s" (buffer-file-name) )
       (if (or (not file) (equal bfn file)) ;; change the same file
           (setq feng-last-change-pos1 (cons bfn end))
         (progn (setq feng-last-change-pos2 (cons bfn end))
