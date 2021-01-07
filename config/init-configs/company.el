@@ -47,7 +47,7 @@
   (define-key company-active-map (kbd "S-TAB") 'company-select-previous)
   (define-key company-active-map (kbd "<backtab>") 'company-select-previous)
 
-  :hook ((c-mode c++-mode objc-mode) .
+  :hook ((c-mode c++-mode objc-mode python-mode) .
           (lambda () (require 'company) (company-mode)))
 
   )
