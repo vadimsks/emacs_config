@@ -1,5 +1,7 @@
 ;; https://org-roam.readthedocs.io/en/master/configuration/
 
+;; To build the cache manually, one can run M-x org-roam-db-build-cache.
+
 (use-package org-roam
   :ensure t
   :hook  (after-init . org-roam-mode)
@@ -19,6 +21,34 @@
 
 (server-start)
 (require 'org-roam-protocol)
+
+
+
+;; C-c C-o to open in the current window
+;; https://stackoverflow.com/questions/17590784/how-to-let-org-mode-open-a-link-like-file-file-org-in-current-window-inste
+(defun org-force-open-current-window ()
+  (interactive)
+  (let ((org-link-frame-setup (quote
+                               ((vm . vm-visit-folder)
+                                (vm-imap . vm-visit-imap-folder)
+                                (gnus . gnus)
+                                (file . find-file)
+                                (wl . wl)))
+                              ))
+    (org-open-at-point)))
+;; Depending on universal argument try opening link
+(defun org-open-maybe (&optional arg)
+  (interactive "P")
+  (if arg
+      (org-open-at-point)
+    (org-force-open-current-window)
+    )
+  )
+;; Redefine file opening without clobbering universal argumnet
+(define-key org-mode-map "\C-c\C-o" 'org-open-maybe)
+
+
+;;(add-hook 'after-init-hook 'org-roam-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
