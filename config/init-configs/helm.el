@@ -5,6 +5,7 @@
 (use-package helm
   :ensure t)
 
+;; (setq helm-buffer-max-length 50)
 ;;(use-package helm-mode
 ;;  :ensure t)
 
@@ -38,7 +39,9 @@
       helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
       helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
       helm-ff-file-name-history-use-recentf t
-      helm-echo-input-in-header-line t)
+      helm-echo-input-in-header-line        t
+      helm-buffer-max-length                50 ; helm-mini filename column width
+      )
 
 (setq
       helm-idle-delay                       0.0
