@@ -1,3 +1,7 @@
+
+;; allow upper case in -*- coding: UTF-8 -*-
+(define-coding-system-alias 'UTF-8 'utf-8)
+
 (use-package py-yapf
   :ensure t)
 
