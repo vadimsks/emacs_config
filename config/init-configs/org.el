@@ -18,8 +18,6 @@
 ; GPG key to use for encryption
 ;(setq org-crypt-key "F6270D37")
 
-
-
 (defun my-org-move-down ()
   " "
   (interactive)
