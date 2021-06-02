@@ -49,6 +49,11 @@
 
 ; move between buffer using M-<arrows>
 (windmove-default-keybindings 'meta) ; new
+  ;; (global-set-key (vector  '(left))  'windmove-left)
+  ;; (global-set-key (vector  '(right)) 'windmove-right)
+  ;; (global-set-key (vector  '(up))    'windmove-up)
+  ;; (global-set-key (vector  '(down))  'windmove-down)
+
 
 ;; disable f11
 (global-set-key [f11] 'help-for-help)
