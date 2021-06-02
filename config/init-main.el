@@ -187,11 +187,19 @@
       (defun svn-pre-run-add-force-interactive ()
         ""
         (add-to-list 'arglist "--force-interactive")
-        (message "asdf %s: %S" cmdtype arglist)
+        (message "calling svn %s: %S" cmdtype arglist)
         )
 
       (add-hook 'svn-pre-run-hook 'svn-pre-run-add-force-interactive)
       ))
+
+;; setting LC_ALL=en_US.UTF-8 fixes gpg-agent comms
+(setq svn-status-svn-environment-var-list '("LC_MESSAGES=C" "LC_ALL=en_US.UTF-8") )
+
+;; (setq svn-status-svn-executable "svn")
+;; (setq svn-status-svn-executable "/home/developer/work/psvn/svn")
+;; (setq svn-status-svn-executable "/home/developer/work/Investigations/mytty_cpp/build/mytty")
+
 
 ;; OpenWith
 ;(require 'openwith)
