@@ -1,6 +1,9 @@
 
 (use-package markdown-mode
-  :ensure t)
+  :ensure t
+  :config
+  (define-key markdown-mode-map (kbd "\C-cm") 'helm-semantic-or-imenu)
+  )
 
 (require 'whitespace)
 ; whitespace-mode
