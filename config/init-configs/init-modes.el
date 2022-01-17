@@ -191,3 +191,8 @@ The window scope is determined by `avy-all-windows' (ARG negates it)."
 
 ;; comment-region
 (global-set-key (kbd "C-c C-c") 'comment-region)
+
+
+(use-package yaml-mode :ensure t)
+(use-package dockerfile-mode :ensure t)
+

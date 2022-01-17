@@ -30,7 +30,7 @@
  '(magit-completing-read-function 'helm--completing-read-default)
  '(menu-bar-mode t)
  '(package-selected-packages
-   '(helm-rg avy expand-region markdown-mode yatemplate buttercup helm-c-yasnippet yasnippet-snippets yasnippet company helm-smex smex helm-projectile helm-make helm-tramp helm-swoop helm-ag helm-flx helm use-package magit haskell-mode))
+   '(dockerfile-mode yaml-mode helm-rg avy expand-region markdown-mode yatemplate buttercup helm-c-yasnippet yasnippet-snippets yasnippet company helm-smex smex helm-projectile helm-make helm-tramp helm-swoop helm-ag helm-flx helm use-package magit haskell-mode))
  '(safe-local-variable-values '((indent-tabs-mode quote t)))
  '(select-enable-clipboard t)
  '(semantic-complete-inline-analyzer-idle-displayor-class 'semantic-displayor-ghost)
