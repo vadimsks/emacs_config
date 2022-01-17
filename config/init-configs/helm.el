@@ -137,6 +137,7 @@
 ;;compilation-search-path
 ;;compilation-directory-matcher
 ;; default-directory
+;; M-x eval-expression
 ;(setq compilation-search-path '(nil))
 ;(setq compilation-directory-matcher '(nil))
 ;;(setq default-directory "/home/user/app")
