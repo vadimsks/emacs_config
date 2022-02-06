@@ -3,6 +3,9 @@
 (require 'beancount)
 (add-to-list 'auto-mode-alist '("\\.beancount\\'" . beancount-mode))
 
+;; make : a symbol
+(modify-syntax-entry ?\: "_" beancount-mode-syntax-table)
+
 ;; Support for external accounts file
 (defvar beancount-accounts-file nil)
 (make-variable-buffer-local 'beancount-accounts-file)
