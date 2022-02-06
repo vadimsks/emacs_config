@@ -115,6 +115,78 @@
                  er/c-mark-statement-block-1 er/c-mark-statement-block-2
                  er/c-mark-vector-access-1   er/c-mark-vector-access-2))))
 
+(defun er/my-find-regexp (r) ""
+       (interactive)
+       (let* ((cur (point))
+              (found1 nil)
+              (found2 nil))
+	     (save-excursion
+		   (goto-char (line-beginning-position))
+           (while (and (not found1)
+                       (re-search-forward r (line-end-position) t ) )
+
+             (if (and (<= (match-beginning 0) cur)
+                      (>= (point) cur))
+                 (setq found1 (match-beginning 0)
+                       found2 (point)))
+             )
+           )
+         (list found1 found2)
+         ) )
+
+;;  Assets:LV:ETrade:BABA                         -7 BABA {231.9 USD}
+;; "-?[0-9]+\\(\\.[0-9]+\\)? [a-z,A-Z]+ {[0-9]+\\(\\.[0-9]+\\)? [A-Z][A-Z][A-Z]}"
+
+(defun er/mark-beancount-stock () "Marks one stock declaration,
+eg. font-weight: bold;"
+       (interactive)
+       
+       (let* ((resp (er/my-find-regexp "-?[0-9]+\\(\\.[0-9]+\\)? [a-z,A-Z]+ {[0-9]+\\(\\.[0-9]+\\)? [A-Z][A-Z][A-Z]}"))
+              (f1 (car resp))
+              (f2 (cadr resp)))
+         (when (and f1 f2)
+           (set-mark f2)
+           (goto-char f1)
+           )
+         ))
+
+(defun er/mark-beancount-price () "Marks one price declaration,
+eg. font-weight: bold;"
+       (interactive)
+       
+       (let* ((resp (er/my-find-regexp "-?[0-9]+\\(\\.[0-9]+\\)? [a-z,A-Z]+"))
+              (f1 (car resp))
+              (f2 (cadr resp)))
+         (when (and f1 f2)
+           (set-mark f2)
+           (goto-char f1)
+           )
+         ))
+
+;;(message "Hello (%s)" foo)
+;;but doesn't work so well for data structures. For that, use
+;;(prin1 list-foo)       
+
+(defun er/add-beancount-mode-expansions ()
+  "Adds beancount-specific expansions for buffers in beancount-mode"
+  (interactive)
+  (set (make-local-variable 'er/try-expand-list)
+       (remove 'er/mark-method-call
+               (append
+                '(er/mark-beancount-price
+                  er/mark-beancount-stock)
+                er/try-expand-list
+                '(er/mark-text-sentence
+                  er/mark-text-paragraph
+                  er/mark-beancount-price
+                  mark-page)))))
+
+(er/enable-mode-expansions 'beancount-mode 'er/add-beancount-mode-expansions)
+
+;;(eval-after-load "beancount-mode"      '(require 'text-mode-expansions))
+;; er/try-expand-list
+
+
 ;; (message "my-ctrl-q-handler _arg=%s" _arg )
 
 
