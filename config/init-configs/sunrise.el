@@ -78,3 +78,24 @@
 
 ;; reload default bookmark file:
 ;; (bookmark-load bookmark-default-file 't )
+
+
+;; Fix for other-window problem - https://githubhot.com/repo/sunrise-commander/sunrise-commander/issues/108
+
+(defadvice other-window
+  (around sr-advice-other-window (count &optional all-frames interactive))
+  "Select the correct Sunrise Commander pane when switching from other windows."
+  (if (or (not sr-running) sr-ediff-on)
+      ad-do-it
+    (let ((from (selected-window)))
+      ad-do-it
+      (unless (or sr-traditional-other-window
+                  (memq from (list sr-left-window sr-right-window)))
+        ;; switching from outside
+        (sr-select-window sr-selected-window))
+      (with-no-warnings
+        (when (eq (selected-window) (sr-other 'window))
+          ;; switching from the other pane
+          (sr-change-window))))))
+
+(ad-activate 'other-window)
