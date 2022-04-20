@@ -98,9 +98,16 @@
 
 (require 'helm-eshell)
 
+;; (add-hook 'eshell-mode-hook
+;;           (lambda ()
+;;               (eshell-cmpl-initialize)
+;;               (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
+;;               (define-key eshell-mode-map (kbd "M-s f") 'helm-eshell-prompts-all)
+;;               (define-key eshell-mode-map (kbd "M-r") 'helm-eshell-history)))
+
 (add-hook 'eshell-mode-hook
           #'(lambda ()
-              (define-key eshell-mode-map (kbd "C-c C-l")  'helm-eshell-history)))
+              (define-key eshell-hist-mode-map (kbd "C-c C-l")  'helm-eshell-history)))
 
 ;; don't use a new frame for shell history
 (setq helm-show-completion-display-function #'helm-show-completion-default-display-function)
