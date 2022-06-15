@@ -315,3 +315,9 @@
       ;; (my-load-init-config "init-org-roam.el")
       ;; (my-load-init-config "init-beancount.el")
       ))
+
+(if (and (getenv "DISPLAY")
+      (not (string= (getenv "DISPLAY") ":0")))
+    (set-frame-size (selected-frame) 1640 970 t)
+   )
+
