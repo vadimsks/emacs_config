@@ -318,6 +318,6 @@
 
 (if (and (getenv "DISPLAY")
       (not (string= (getenv "DISPLAY") ":0")))
-    (set-frame-size (selected-frame) 1640 970 t)
+    (set-frame-size (selected-frame) 1640 950 t)
    )
 
