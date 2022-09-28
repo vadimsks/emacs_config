@@ -188,6 +188,12 @@
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 
 
+(use-package js
+  :ensure t
+  (define-key js-mode-map (kbd "\C-cm") 'helm-semantic-or-imenu)
+  )
+
+
 ;; (define-key sr-mode-map "\C-x\C-f"    'helm-find-file)
 
 
