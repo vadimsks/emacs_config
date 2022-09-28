@@ -273,3 +273,5 @@ The window scope is determined by `avy-all-windows' (ARG negates it)."
 
 (use-package ztree :ensure t)
 
+; yank replaces selection
+(delete-selection-mode t)
