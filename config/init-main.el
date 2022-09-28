@@ -315,3 +315,4 @@
       ;; (my-load-init-config "init-org-roam.el")
       ;; (my-load-init-config "init-beancount.el")
       ))
+(my-load-init-config "sunrise.el")
