@@ -271,3 +271,5 @@ The window scope is determined by `avy-all-windows' (ARG negates it)."
 (use-package yaml-mode :ensure t)
 (use-package dockerfile-mode :ensure t)
 
+(use-package ztree :ensure t)
+
