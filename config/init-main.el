@@ -294,7 +294,7 @@
 (my-load-init-config "init-ffap.el")
 (my-load-init-config "smex.el")
 (my-load-init-config "gui.el")
-(my-load-init-config "sunrise.el")
+;; (my-load-init-config "sunrise.el")
 (my-load-init-config "company.el")
 ;; ;(my-load-init-config "cedet.el")
 (my-load-init-config "cpp_fmt.el")
