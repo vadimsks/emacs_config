@@ -241,4 +241,5 @@
 
 (require 'python)
 (define-key python-mode-map (kbd "M-q") 'my-py-yapf-region)
+(define-key python-mode-map (kbd "\C-cm") 'helm-semantic-or-imenu)
 
