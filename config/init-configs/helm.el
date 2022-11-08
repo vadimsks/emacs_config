@@ -190,7 +190,9 @@
 
 (use-package js
   :ensure t
-  (define-key js-mode-map (kbd "\C-cm") 'helm-semantic-or-imenu)
+  :bind (:map js-mode-map
+              (("C-c m" . 'helm-semantic-or-imenu))
+              )
   )
 
 
