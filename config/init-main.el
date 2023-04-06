@@ -1,6 +1,9 @@
 ;; .emacs contents
 ;; (load "~/work/emacs/emacs_config/config/init-main.el" 'noerror)
 
+(setq my-config-variant 'my-config-main)
+;; (setq my-config-variant 'my-config-wsl)
+
 (setq custom-file "~/work/emacs/emacs_config/config/init-custom.el")
 (load custom-file 'noerror)
 
