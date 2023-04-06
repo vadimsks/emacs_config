@@ -307,6 +307,7 @@
 (my-load-init-config "init-modes.el")
 (if (not (eq system-type 'windows-nt))
     (progn
+      (my-load-init-config "init-wsl.el")
       (my-load-init-config "init-clang.el")
 
       (my-load-init-config "init-html.el")
