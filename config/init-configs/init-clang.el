@@ -23,6 +23,7 @@
         (setq lsp-clients-clangd-executable "/home/developer/local/bin/clangd" )
         (setq lsp-disabled-clients '(ccls)))
     (setq lsp-clients-clangd-executable "~/work/clang11/clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-16.04/bin/clangd" ))
+  (setq lsp-lens-enable nil)
   )
 
 ;;(use-package lsp-ui :commands lsp-ui-mode)

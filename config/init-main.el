@@ -320,7 +320,9 @@
       ;; (my-load-init-config "init-beancount.el")
       ))
 
-(if (and (getenv "DISPLAY")
-      (not (string= (getenv "DISPLAY") ":0")))
-    (set-frame-size (selected-frame) 1640 950 t)
-   )
+;; (if (and (getenv "DISPLAY")
+;;       (not (string= (getenv "DISPLAY") ":0")))
+;;     (set-frame-size (selected-frame) 1640 950 t)
+;;    )
+
+(my-load-init-config "sunrise.el")
