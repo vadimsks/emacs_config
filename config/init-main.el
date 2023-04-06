@@ -1,6 +1,9 @@
 ;; .emacs contents
 ;; (load "~/work/emacs/emacs_config/config/init-main.el" 'noerror)
 
+(setq my-config-variant 'my-config-main)
+;; (setq my-config-variant 'my-config-wsl)
+
 (setq custom-file "~/work/emacs/emacs_config/config/init-custom.el")
 (load custom-file 'noerror)
 
@@ -13,7 +16,7 @@
 ;; Setup package.el
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
 ;; Bootstrap `use-package'
@@ -307,6 +310,7 @@
 (my-load-init-config "init-modes.el")
 (if (not (eq system-type 'windows-nt))
     (progn
+      (my-load-init-config "init-wsl.el")
       (my-load-init-config "init-clang.el")
 
       (my-load-init-config "init-html.el")
@@ -315,4 +319,8 @@
       ;; (my-load-init-config "init-org-roam.el")
       ;; (my-load-init-config "init-beancount.el")
       ))
-(my-load-init-config "sunrise.el")
+
+(if (and (getenv "DISPLAY")
+      (not (string= (getenv "DISPLAY") ":0")))
+    (set-frame-size (selected-frame) 1640 950 t)
+   )

@@ -9,7 +9,7 @@
 ;;(use-package helm-mode
 ;;  :ensure t)
 
-(require 'helm-config)
+;(require 'helm-config)
 
 (use-package helm-flx :ensure t)
 (helm-flx-mode +1)
@@ -127,11 +127,15 @@
                         (projectile-project-name))))
 
 ;; projectile-svn-command
-(setq projectile-indexing-method 'alien)
-;;(setq projectile-indexing-method 'native)
+(if (equal my-config-variant 'my-config-wsl)
+    (setq projectile-indexing-method 'native)
+  (setq projectile-indexing-method 'alien)
+  )
+
 ;; 
 ;;(setq projectile-svn-command "find . -type f -print0" )
 (setq projectile-svn-command "find . -path ./build -prune -o -type f -and -not -regex '.*\\.svn.*' -and -not -name 'TAGS' -and -not -regex '.*~' -print0" )
+;;(setq projectile-svn-command "find . -path ./build -prune -o -path ./Phoenix -prune -o -type f -and -not -regex '.*\\.svn.*'  -and -not -regex '.*\\\\\\.*' -and -not -name 'TAGS' -and -not -regex '.*~' -print0" )
 
 ;; Help ffap (C-c C-o) find files in compilation output
 ;; (push (cons 'compilation-mode
