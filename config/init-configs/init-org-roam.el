@@ -4,23 +4,36 @@
 
 (use-package org-roam
   :ensure t
-  :hook  (after-init . org-roam-mode)
-  :custom  (org-roam-directory "~/work/org/")
-  :bind (:map org-roam-mode-map
-              (("C-c n l" . org-roam)
-               ("C-c n f" . org-roam-find-file)
-               ("C-c n g" . org-roam-graph-show))
-              :map org-mode-map
-              (("C-c n i" . org-roam-insert))
-              (("C-c n I" . org-roam-insert-immediate))))
+  :custom
+  (org-roam-directory (file-truename "~/work/org-roam/"))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+         ("C-c C-u" . my-org-goto-back)
+         ;; Dailies
+         ("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  ;; If you're using a vertical completion framework, you might want a more informative completion interface
+  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  (org-roam-db-autosync-mode)
+  ;; If using org-roam-protocol
+  ;; (require 'org-roam-protocol)
+  )
+
+(require 'org-roam)
+
+;; (org-roam-db-autosync-mode)
+;; To build the cache manually, run M-x org-roam-db-sync
 
 ; (define-key org-roam-mode-map (kbd "C-c n j") #'org-roam-jump-to-index)
 ; (define-key org-roam-mode-map (kbd "C-c n b") #'org-roam-switch-to-buffer)
 
 (setq org-roam-completion-system 'helm)
 
-(server-start)
-(require 'org-roam-protocol)
+;; (server-start)
+;; (require 'org-roam-protocol)
 
 
 
@@ -43,9 +56,20 @@
       (org-open-at-point)
     (org-force-open-current-window)
     )
+  (org-roam-buffer--redisplay-h)
   )
+
 ;; Redefine file opening without clobbering universal argumnet
 (define-key org-mode-map "\C-c\C-o" 'org-open-maybe)
+
+(defun my-org-goto-back (&optional arg)
+  (interactive "P")
+  (org-mark-ring-goto)
+  (org-roam-buffer--redisplay-h)
+  )
+
+(define-key org-mode-map "\C-c\C-u" 'my-org-goto-back)
+
 
 
 ;;(add-hook 'after-init-hook 'org-roam-mode)
