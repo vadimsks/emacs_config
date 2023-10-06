@@ -158,14 +158,23 @@
 
 ;; Help ffap (C-c C-o) find files in compilation output
 ;; Add project root dir to the compilation-search-path
+
+(defun my-replace-prefix-if-present (string prefix new-prefix)
+  "If STRING starts with PREFIX, replace the PREFIX by NEW-PREFIX.
+Else, returns NIL."
+  (if (string-prefix-p prefix string)
+      (concat new-prefix (substring string (length prefix)))
+    string))
+
 (defun my-compilation-find-file ( orig marker filename dir &rest formats )
   "Find a buffer for file FILENAME."
+  (message "compilation-search-path 1: %s, %s" filename dir)
   (let* ((lst (if (projectile-project-p dir)
                (append compilation-search-path (cons (projectile-project-root dir) nil) )
              compilation-search-path ))
          (compilation-search-path lst))
     (message "compilation-search-path: %s" compilation-search-path)
-    (apply orig marker filename dir formats) )
+    (apply orig marker (my-replace-prefix-if-present filename "/code/" "./") dir formats) )
   )
 
 (advice-add 'compilation-find-file :around #'my-compilation-find-file )
