@@ -180,7 +180,9 @@
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 
 ;;; psvn
-(if (not (eq system-type 'windows-nt))
+(if (and
+      (not (eq system-type 'windows-nt))
+      (not (eq system-type 'darwin)))
     (progn
       (require 'psvn)
       (setq svn-status-track-user-input 't)
