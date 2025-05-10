@@ -6,6 +6,12 @@
   (setq magit-section-initial-visibility-alist
         '((tags . hide) (stashes . hide) (untracked . hide) (unpushed . hide))
         )
+  ;; show skip‐worktree files in magit-status
+  (magit-add-section-hook
+   'magit-status-sections-hook
+   'magit-insert-skip-worktree-files
+   nil                                 ; insert after default sections
+   t)                                  ; append at end
   )
 
 ;; customize-variable magit-completing-read-function
