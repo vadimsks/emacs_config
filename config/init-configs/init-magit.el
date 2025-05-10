@@ -3,6 +3,9 @@
   :config
   (global-set-key (kbd "C-x g") 'magit-status)
   (setq magit-diff-refine-hunk t)
+  (setq magit-section-initial-visibility-alist
+        '((tags . hide) (stashes . hide) (untracked . hide) (unpushed . hide))
+        )
   )
 
 ;; customize-variable magit-completing-read-function
