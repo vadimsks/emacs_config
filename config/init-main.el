@@ -329,3 +329,14 @@
 ;;    )
 
 (my-load-init-config "sunrise.el")
+
+;; load nix path
+(use-package exec-path-from-shell
+  :ensure t)
+
+(when (memq window-system '(mac ns x))  ; only needed for GUI frames
+  (require 'exec-path-from-shell)
+  (dolist (v '("NIX_SSL_CERT_FILE" "NIX_PATH"))
+    (add-to-list 'exec-path-from-shell-variables v))
+  (exec-path-from-shell-initialize))
+
