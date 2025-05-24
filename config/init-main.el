@@ -323,6 +323,10 @@
       ;; (my-load-init-config "init-beancount.el")
       ))
 
+(if (eq system-type 'darwin)
+    (my-load-init-config "init-macos.el")
+  )
+
 ;; (if (and (getenv "DISPLAY")
 ;;       (not (string= (getenv "DISPLAY") ":0")))
 ;;     (set-frame-size (selected-frame) 1640 950 t)
